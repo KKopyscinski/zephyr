@@ -315,6 +315,9 @@ static void listen(uint8_t *data, uint16_t len)
 	} else if (server->psm == 0x00F2) {
 		/* TSPX_psm_authentication_required */
 		server->sec_level = BT_SECURITY_L3;
+	} else if (IS_ENABLED(CONFIG_BT_SMP_ENFORCE_MITM)) {
+		/* TSPX_psm_authentication_required */
+		server->sec_level = BT_SECURITY_L3;
 	}
 
 	if (bt_l2cap_server_register(server) < 0) {
